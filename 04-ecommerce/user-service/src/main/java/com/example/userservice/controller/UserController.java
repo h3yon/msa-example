@@ -3,6 +3,7 @@ package com.example.userservice.controller;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,23 +23,18 @@ import com.example.userservice.vo.Response.ResponseUser;
 public class UserController {
 
     private UserService userService;
-
-    //    value 가져오는 방법1
-//    private Environment env;
-//
-//    public UserController(Environment env) {
-//        this.env = env;
-//    }
+    private Environment env;
     @Autowired
     private Greeting greeting;
 
-    public UserController(UserService userService) {
+    public UserController(Environment env, UserService userService) {
+        this.env = env;
         this.userService = userService;
     }
 
     @GetMapping("/health_check")
     public String status() {
-        return "It's Working in User Service";
+        return String.format("It's Working in User Service on PORT: %s", env.getProperty("local.server.port"));
     }
 
     @GetMapping("/welcome")
