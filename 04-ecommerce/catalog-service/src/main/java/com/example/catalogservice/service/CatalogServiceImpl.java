@@ -6,12 +6,10 @@ import org.springframework.stereotype.Service;
 import com.example.catalogservice.jpa.CatalogEntity;
 import com.example.catalogservice.jpa.CatalogRepository;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class CatalogServiceImpl implements CatalogService {
 
     CatalogRepository catalogRepository;
